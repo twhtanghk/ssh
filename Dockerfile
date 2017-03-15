@@ -12,4 +12,4 @@ RUN npm install
 
 EXPOSE 1337                                                                     
                                                                                 
-ENTRYPOINT node app.js --prod
+ENTRYPOINT ./entrypoint.sh
