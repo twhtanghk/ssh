@@ -1,10 +1,8 @@
-argv = require('yargs').argv
 gulp = require 'gulp'
 browserify = require 'browserify'
 streamify = require 'gulp-streamify'
 source = require 'vinyl-source-stream'
 uglify = require 'gulp-uglify'
-concat = require 'gulp-concat'
 sass = require 'gulp-sass'
 minifyCss = require 'gulp-minify-css'
 rename = require 'gulp-rename'
@@ -17,8 +15,6 @@ gulp.task 'default', ['coffee', 'sass']
 gulp.task 'config', ->
   keys = [
     'ROOTURL'
-    'ALLOW'
-    'DENY'
   ]
   fs.writeFileSync 'www/js/config.json', util.inspect _.pick(process.env, keys)
   
