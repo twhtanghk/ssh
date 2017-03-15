@@ -12,13 +12,16 @@ _ = require 'lodash'
 fs = require 'fs'
 util = require 'util'
 
-config = (params) ->
-  _.defaults params,
-    _.pick(process.env, 'ROOTURL', 'AUTHURL', 'VERIFYURL', 'OAUTH2_SCOPE')
-  fs.writeFileSync 'www/js/config.json', util.inspect(params)
-
 gulp.task 'default', ['coffee', 'sass']
 
+gulp.task 'config', ->
+  keys = [
+    'ROOTURL'
+    'ALLOW'
+    'DENY'
+  ]
+  fs.writeFileSync 'www/js/config.json', util.inspect _.pick(process.env, keys)
+  
 gulp.task 'sass', (done) ->
   gulp.src './scss/index.scss'
     .pipe sass()
@@ -27,10 +30,9 @@ gulp.task 'sass', (done) ->
     .pipe rename extname: '.min.css'
     .pipe gulp.dest './www/css/'
 
-gulp.task 'coffee', ->
-  browserify(entries: ['./www/js/index.coffee'])
+gulp.task 'coffee', ['config'], ->
+  browserify entries: ['./www/js/index.coffee']
     .transform 'coffeeify'
-    .transform 'debowerify'
     .bundle()
     .pipe source 'index.js'
     .pipe gulp.dest './www/js/'

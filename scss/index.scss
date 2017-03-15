@@ -1,3 +1,5 @@
+@import "node_modules/xterm/dist/xterm";
+
 $bgcolor: #fafafa;
 
 body {
@@ -6,6 +8,11 @@ body {
   color: #111;
 
   h1 {
+    text-align: center;
+  }
+
+  #params {
+    margin: auto;
     text-align: center;
   }
 
