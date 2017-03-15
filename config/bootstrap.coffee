@@ -15,7 +15,6 @@ module.exports =
             sshConn = new SSHClient()
             sshConn
               .on 'ready', ->
-                socket.emit 'data', 'ssh ready'
                 sshConn.shell (err, stream) ->
                   if err
                     return reject err
