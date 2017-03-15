@@ -2,6 +2,13 @@
   if not (name of process.env)
     throw new Error "process.env.#{name} not yet defined"
 
+ip = require 'ip'
+
+allow = (addr) ->
+  ALLOW = ip.cidrSubnet process.env.ALLOW
+  DENY = ip.cidrSubnet process.env.DENY
+  ALLOW.contains(addr) and not DENY.contains(addr)
+
 module.exports =
   bootstrap: (done) ->
     sails.io
@@ -11,6 +18,8 @@ module.exports =
           .on 'ssh', (opts) ->
             reject = (err) ->
               socket.emit 'data', "#{err.toString()}\r\n"
+            if not allow opts.host
+              return reject "#{opts.host} not allowed"
             SSHClient = require('ssh2').Client
             sshConn = new SSHClient()
             sshConn
