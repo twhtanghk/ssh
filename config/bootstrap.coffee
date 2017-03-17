@@ -18,6 +18,7 @@ module.exports =
           .on 'ssh', (opts) ->
             reject = (err) ->
               socket.emit 'data', "#{err.toString()}\r\n"
+              socket.disconnect true
             if not allow opts.host
               return reject "#{opts.host} not allowed"
             SSHClient = require('ssh2').Client
@@ -35,8 +36,6 @@ module.exports =
                     .on 'close', ->
                       sshConn.end()
                       socket.disconnect true
-              .on 'close', ->
-                reject 'ssh closed'
               .on 'error', (err) ->
                 reject err
               .connect opts
