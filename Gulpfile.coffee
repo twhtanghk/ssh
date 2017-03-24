@@ -15,6 +15,9 @@ gulp.task 'default', ['coffee', 'sass']
 gulp.task 'config', ->
   keys = [
     'ROOTURL'
+    'HOST'
+    'USERNAME'
+    'PASSWORD'
   ]
   fs.writeFileSync 'www/js/config.json', util.inspect _.pick(process.env, keys)
   
