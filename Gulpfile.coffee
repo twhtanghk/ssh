@@ -16,7 +16,6 @@ gulp.task 'config', ->
   keys = [
     'ROOTURL'
     'HOST'
-    'PORT'
     'USERNAME'
     'PASSWORD'
   ]

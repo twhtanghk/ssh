@@ -35,7 +35,7 @@ window.addEventListener 'load', ->
   elem = document.getElementById 'terminal-container'
   queryString = require 'query-string'
   parsed = queryString.parse window.location.search
-  port = parsed.port || cfg.PORT || "22"
+  port = parsed.port || "22"
   document.getElementById('server').value = "#{cfg.HOST}:#{port}"
   document.getElementById('username').value = cfg.USERNAME || ""
   document.getElementById('password').value = cfg.PASSWORD || ""
