@@ -14,7 +14,7 @@ window.connect = ->
 
   opts = 
     path: path.join url.parse(window.location.href).pathname, "socket.io"
-  socket = io window.location.href, opts
+  socket = io window.location.href.replace(/\/$/, ""), opts
     .on 'error', console.log
     .on 'connect', ->
       term.on 'data', (data) ->
