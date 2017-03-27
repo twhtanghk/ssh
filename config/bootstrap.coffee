@@ -25,7 +25,6 @@ module.exports =
             catch e
               reject e
               return
-            sails.log.debug "abc"
             SSHClient = require('ssh2').Client
             sshConn = new SSHClient()
             sshConn
