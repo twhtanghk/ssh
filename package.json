@@ -8,7 +8,6 @@
     "bower": "^1.8.0",
     "include-all": "^1.0.0",
     "ip": "^1.1.5",
-    "query-string": "^4.3.2",
     "rc": "1.0.1",
     "sails": "^0.12.13",
     "sails-hook-requestlogger-file": "^2.0.5",
