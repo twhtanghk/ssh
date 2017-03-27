@@ -1,7 +1,6 @@
+url = require 'url'
+path = require 'path'
 cfg = require './config.json'
-if not ('ROOTURL' of cfg)
-  throw new Error "cfg.#{ROOTURL} not defined yet"
-
 io = require 'socket.io-client'
 term = null
 
@@ -13,8 +12,9 @@ window.connect = ->
   catch e
     alert e.toString()
 
-  opts = path: "#{require('url').parse(cfg.ROOTURL).pathname}/socket.io"
-  socket = io cfg.ROOTURL, opts
+  opts = 
+    path: path.join url.parse(window.location.href).pathname, "socket.io"
+  socket = io window.location.href, opts
     .on 'error', console.log
     .on 'connect', ->
       term.on 'data', (data) ->
