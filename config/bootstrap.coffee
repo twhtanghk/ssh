@@ -19,8 +19,11 @@ module.exports =
             reject = (err) ->
               socket.emit 'data', "#{err.toString()}\r\n"
               socket.disconnect true
-            if not allow opts.host
-              return reject "#{opts.host} not allowed"
+            try
+              if not allow opts.host
+                return reject "#{opts.host} not allowed"
+            catch e
+              return reject e
             SSHClient = require('ssh2').Client
             sshConn = new SSHClient()
             sshConn

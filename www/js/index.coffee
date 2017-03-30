@@ -33,6 +33,9 @@ window.connect = ->
 
 window.addEventListener 'load', ->
   elem = document.getElementById 'terminal-container'
+  urlObj = require('url').parse window.location.href, true
+  port = urlObj.query.port || "22"
+  document.getElementById('server').value = "#{urlObj.host}:#{port}"
   Terminal = require 'xterm'
   term = new Terminal cursorBlink: true
   term.open elem
