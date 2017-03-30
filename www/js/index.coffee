@@ -1,6 +1,5 @@
 url = require 'url'
 path = require 'path'
-cfg = require './config.json'
 io = require 'socket.io-client'
 term = null
 

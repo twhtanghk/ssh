@@ -12,12 +12,6 @@ util = require 'util'
 
 gulp.task 'default', ['coffee', 'sass']
 
-gulp.task 'config', ->
-  keys = [
-    'ROOTURL'
-  ]
-  fs.writeFileSync 'www/js/config.json', util.inspect _.pick(process.env, keys)
-  
 gulp.task 'sass', (done) ->
   gulp.src './scss/index.scss'
     .pipe sass()
@@ -26,7 +20,7 @@ gulp.task 'sass', (done) ->
     .pipe rename extname: '.min.css'
     .pipe gulp.dest './www/css/'
 
-gulp.task 'coffee', ['config'], ->
+gulp.task 'coffee', ->
   browserify entries: ['./www/js/index.coffee']
     .transform 'coffeeify'
     .bundle()
