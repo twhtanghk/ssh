@@ -13,22 +13,25 @@ window.connect = ->
 
   opts = 
     path: path.join url.parse(window.location.href).pathname, "socket.io"
-  socket = io window.location.href.replace(/\/$/, ""), opts
+    reconnection: false
+    autoConnect: false
+  socket = io '/', opts
     .on 'error', console.log
     .on 'connect', ->
       term.on 'data', (data) ->
         socket.emit 'data', data
+
+      socket.emit 'ssh',
+        host: host
+        port: port
+        username: document.getElementById('username').value
+        password: document.getElementById('password').value 
     .on 'data', (data) ->
       term.write data
     .on 'disconnect', ->
       term.write "Disconnected\r\n"
       document.getElementById('connect').disabled = false
-
-  socket.emit 'ssh',
-    host: host
-    port: port
-    username: document.getElementById('username').value
-    password: document.getElementById('password').value 
+    .connect()
 
 window.addEventListener 'load', ->
   elem = document.getElementById 'terminal-container'

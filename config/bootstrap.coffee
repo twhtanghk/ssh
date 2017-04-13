@@ -12,7 +12,6 @@ allow = (addr) ->
 module.exports =
   bootstrap: (done) ->
     sails.io
-      .of require('url').parse(process.env.ROOTURL).pathname
       .on 'connection', (socket) ->
         socket
           .on 'ssh', (opts) ->
