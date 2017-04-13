@@ -1,4 +1,4 @@
-['ROOTURL', 'ALLOW', 'DENY'].map (name) ->
+['ALLOW', 'DENY'].map (name) ->
   if not (name of process.env)
     throw new Error "process.env.#{name} not yet defined"
 
